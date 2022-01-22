@@ -1,0 +1,26 @@
+import java.util.*;
+import java.io.*;
+
+class InterLeaving{
+    
+    public static void interLeaving(String str1, String str2, int i, int j, String result){
+        if(i==str1.length()&&j==str2.length()){
+            System.out.println(result);
+        }
+        if(i<str1.length()){
+            interLeaving(str1,str2,i+1,j,result+str1.charAt(i));
+        }
+        if(j<str2.length()){
+            interLeaving(str1,str2,i,j+1,result+str2.charAt(j));
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter first string: "); 
+        String str1 = scan.next();
+        System.out.print("Enter second string: "); 
+        String str2 = scan.next();
+        interLeaving(str1,str2,0,0,"");
+    }
+}
