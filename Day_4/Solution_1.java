@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-class Solution_1 {
+class Main {
     
     public static int countChar(String str, char ch) {
         int occurrence = 0;
@@ -12,14 +12,12 @@ class Solution_1 {
     }
     
     public static String substring(String str, int start, int end) {
-        String subString;
+        String subString = "";
         for(int i=start; i<=end; i++) {
             subString += str.charAt(i);
         }
         return subString;
     }
-    
-    public static String[] split(String str, char ch) {}
     
     public static boolean hasPattern(String str, String pattern) {
         int start1=0, start2=0;
@@ -46,45 +44,56 @@ class Solution_1 {
     
     public static String reverse(String str) {
         char temp = ' ';
-        for(int i=0; i<str.length()/2; ) {
-            temp = str.charAt(i);
-            str.charAt(i) = str.charAt(str.length()-1-i);
-            str.charAt(str.length()-1-i) = temp;
+        char[] characterArray = new char[str.length()];
+        characterArray = str.toCharArray();
+        for(int i=0; i<str.length()/2; i++) {
+            temp = characterArray[i];
+            characterArray[i] = characterArray[str.length()-1-i];
+            characterArray[str.length()-1-i] = temp;
         }
-        return str;
+        String string = new String(characterArray);
+        return string;
+    }
+    
+    public static boolean isVowel(char c) {
+        return (c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u' || c == 'U');
     }
     
     public static String reverseVowels(String str) {
-        int start=0, end=str.length()-1,i=0,j=0;
-        char ch[] = str.toCharArray();
-        while(start < end){
-            for(i=start; i<str.length(); i++){
-                if(ch[i]=='a'||ch[i]=='e'||ch[i]=='i'||ch[i]=='o'||ch[i]=='u') {
-                    start = i;
-                    break;
-                }
-            }
-            for(j=end; j>=0; j--){
-                if(ch[j]=='a'||ch[j]=='e'||ch[j]=='i'||ch[i]=='o'||ch[j]=='u') {
-                    end = j;
-                    break;
-                }
-            }
-            if(start<end){
-                char temp = ch[i];
-            ch[i] = ch[j];
-            ch[j] = temp;
-            }
-            
+        int start = 0;
+        int end = str.length()-1;
+        char[] str1 = str.toCharArray();
+        while (start < end)
+        {
+        if (!isVowel(str1[start]))
+        {
             start++;
-            end--;
+            continue;
         }
-        String string = new String(ch);
-        return string;
+        if (!isVowel(str1[end]))
+        {
+            end--;
+            continue;
+        }
+        char t = str1[start];
+        str1[start]= str1[end];
+        str1[end]= t;
+         
+ 
+        start++;
+        end--;
+    }
+    String str2 = String.copyValueOf(str1);
+    return str2;
     }
     
     public static void main(String[] args) {
         String str = "liipcoce";
+        System.out.println(countChar("liipcoce",'i'));
+        System.out.println(substring("liipcoce",1,4));
+        System.out.println(hasPattern("liipcoce","iip"));
+        System.out.println(allWordsContainsChar("hhhh",'h'));
+        System.out.println(reverse("apple"));
         System.out.println(reverseVowels(str)); 
     }
 }
