@@ -1,25 +1,23 @@
 
-import java.net.URL;
+import java.util.regex.Pattern;
 
-class Solution_4 {
+public class Solution_4 {
+    public static void main(String[] args) {
+       System.out.println(isValidUrl("https://himanshu.sharma@bigohtech.com")); 
+    }
+    public static boolean isValidUrl(String url)
+    {
+        String regex = "((http|https)://)(www.)?"
+              + "[a-zA-Z0-9@:%._\\+~#?&//=]"
+              + "{2,256}\\.[a-z]"
+              + "{2,6}\\b([-a-zA-Z0-9@:%"
+              + "._\\+~#?&//=]*)";
+        Pattern pattern = Pattern.compile(regex);
 
-	
-	public static boolean isValid(String url)
-	{
-		
-			new URL(url).toURI();
-			return true;
-		
-			return false;
-	}
-	
-	public static void main(String[] args)
-	{
-		String url1 = "https://www.facebook.org/";
-		if (isValid(url1))
-			System.out.println("Yes");
-		else
-			System.out.println("No");	
-			
-	}
+        if (url == null) {
+            return false;
+        }
+        java.util.regex.Matcher m = pattern.matcher(url);
+        return m.matches();
+    }
 }
